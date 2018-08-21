@@ -56,3 +56,79 @@ for i in range(1,4):
   text3="Schedule3"
  speech3=gTTs(text3)
  speech3.save("schedule.mp3")
+ 
+ 
+ 
+ 
+Final code: 
+ 
+ 
+ from gtts import gTTS
+import speech_recognition as sr
+import os
+
+def talkToMe(audio):
+  print(audio)
+  tts = gTTS(text=audio,lang='en')
+  tts.save("audio.mp3")
+  os.system('mpg123 audio.mp3')
+
+
+def mycommand():
+   r = sr.Recognizer()
+
+   with sr.Microphone() as source:
+      print('Iam ready for your next command')
+      r.pause_threshold = 1
+      r.adjust_for_ambient_noise(source,duration =1)
+      audio = r.listen(source)
+   try:
+      command = r.recognize_google(audio)
+      print('you said:' +command +'\n')
+   except sr.unknownValueError:
+      assisstent(mycommand())
+
+   return command                                                                                                                                                           
+
+def assistant(command):
+
+    if 'monday schedule' in command:
+     talkToMe('your first schedule is to buy boke')
+     talkToMe('your next schedule for the day is meeting your friends at cafe')
+     talkToMe('your next schedule for the day is prepare ppt for tommorrows presentation')
+
+    if 'tuesday schedule' in command:
+     talkToMe('your first schedule is to go for gym')
+     talkToMe('your next schedule for the day is to go for medical check on 11.00 am')
+     talkToMe('your next schedule for the day is to buy a gift for your favourite person')
+
+    if 'wednesday schedule' in command:
+     talkToMe('your first schedule is to have fresh juice')
+     talkToMe('your next schedule for the day is to do yoga')
+     talkToMe('your next schedule for the day is to get prepare for conference')
+
+    if 'thursday schedule' in command:
+     talkToMe('your first schedule is to go for shopping')
+     talkToMe('your next schedule for the day is meet your manager')
+     talkToMe('your next schedule for the day is submit your presentation within 5pm')
+
+    if 'friday schedule' in command:
+     talkToMe('your first schedule is to do yoga')
+     talkToMe('your next schedule for the day is meeting your friends at cafe')
+     talkToMe('your next schedule for the day is to buy wedding gift')
+
+    if 'saturday schedule' in command:
+       talkToMe('your first schedule is to send ppt to manager')
+       talkToMe('your next schedule for the day is to buy your favourite foods')
+       talkToMe('your next schedule for the day is prepare ppt for todays presentation')
+
+    if 'sunday schedule' in command:
+     talkToMe('your first schedule is to visit your favourite spot')
+     talkToMe('your next schedule for the day is meeting your friends at cafe')
+     talkToMe('your next schedule for the day is to have dinner at taj resort')
+      
+talkToMe('I am ready for your command')
+
+while True:
+ assistant(mycommand())
+
